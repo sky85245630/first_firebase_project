@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.15.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.15.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.15.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.15.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.15.1/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <p>IT QQ</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    <button onclick="getdata()"> get</button>
+    <button onclick="storedata()"> storedata</button>
+    <button onclick="set()">set</button>
+    
+    storedata
+
+    </div>
+    <p id="load"></p><input type='file' id='fileButton' value='upload'></p>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+
+      var db = firebase.firestore();
+      function getdata() {
+      var db = firebase.firestore();
+
+  var docRef = db.collection("movies").doc("新世紀福爾摩斯");
+  docRef.get().then(function(doc) {
+      if (doc.exists) {
+        console.log(doc.data());
+      } else {
+        console.log("找不到文件");
+      }
+    })
+    .catch(function(error) {
+      console.log("提取文件時出錯:", error);
+    });
+}
+
+function storedata() {
+  var db = firebase.firestore();
+
+  db.collection("movies").doc("新世紀福爾摩斯").set({
+    name: "新世紀福爾摩斯",
+    date: "2010",
+    desctiption: "本劇改編自阿瑟·柯南·道爾爵士家喻戶曉的推理小說，一位脾氣古怪的大偵探在現代倫敦的街頭悄悄巡行，四處搜尋線索。",
+    actors: ["班尼迪克·康柏拜區", "馬丁·費曼"]
+  });
+}
+
+function set(){
+        var db = firebase.firestore();
+        var ref = db.collection('fruit').doc('apple');
+
+        ref.set({
+          total: 500,
+          good: 480,
+          sale: 330
+        }).then(() => {
+          console.log('set data successful');
+        });
+      }
+    </script>
+  </body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+<script src='https://www.gstatic.com/firebasejs/7.15.1/firebase.js'></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-firestore.js"></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBvoI1rVhy_Htouz3A673Wh2N6kt3KoZv4",
+    authDomain: "first-web-firebase-project.firebaseapp.com",
+    databaseURL: "https://first-web-firebase-project.firebaseio.com",
+    projectId: "first-web-firebase-project",
+    storageBucket: "first-web-firebase-project.appspot.com",
+    messagingSenderId: "322024651309",
+    appId: "1:322024651309:web:0fb309af3d7cf91436d6a4",
+    measurementId: "G-NMR8LBJXK7"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script>
+    var storage = firebase.storage();
+   //做一個簡單的檔案上傳器
+    //……………………………………………………………………..
+    var fileButton=document.getElementById('fileButton');
+   fileButton.addEventListener("change", function(e) {
+   //檔案
+    var file=e.target.files[0];
+   //設定firebase上傳細節
+    var storageRef = firebase.storage().ref('photo/'+file.name);
+   //執行！
+    storageRef.put(file);
+   });
+   </script>
+</html>
