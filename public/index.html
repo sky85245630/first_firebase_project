@@ -93,10 +93,14 @@
       <button onclick="getdata()">get</button>
       <button onclick="storedata()">storedata</button>
       <button onclick="set()">set</button>
+      <button class='signin' onclick="">sign-in-button</button>
+
+      .sign-in-button
 
       storedata
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+
+    <p id="load"></p><input type='file' id='fileButton' value='upload'></p>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
@@ -179,7 +183,7 @@
   </script>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
-
+  <script src='https://www.gstatic.com/firebasejs/4.1.3/firebase.js'></script>
   <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
@@ -201,4 +205,33 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
   </script>
+
+
+
+<script>
+firebase.auth().languageCode = 'it';
+// To apply the default browser preference instead of explicitly setting it.
+// firebase.auth().useDeviceLanguage();
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('.signin', {
+  'size': 'invisible',
+  'callback': function(response) {
+    //當你的按鈕按下後，且驗證不是機器案的，那就執行callback function
+  }
+});
+</script>
+
+<script>
+ var storage = firebase.storage();
+//做一個簡單的檔案上傳器
+ //……………………………………………………………………..
+ var fileButton=document.getElementById('fileButton');
+fileButton.addEventListener("change", function(e) {
+//檔案
+ var file=e.target.files[0];
+//設定firebase上傳細節
+ var storageRef = firebase.storage().ref('photo/'+file.name);
+//執行！
+ storageRef.put(file);
+});
+</script>
 </html>
