@@ -38,11 +38,12 @@
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     <button onclick="getdata()"> get</button>
     <button onclick="storedata()"> storedata</button>
-
+    <button onclick="set()">set</button>
+    
     storedata
 
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <p id="load"></p><input type='file' id='fileButton' value='upload'></p>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
@@ -92,10 +93,24 @@ function storedata() {
     actors: ["班尼迪克·康柏拜區", "馬丁·費曼"]
   });
 }
+
+function set(){
+        var db = firebase.firestore();
+        var ref = db.collection('fruit').doc('apple');
+
+        ref.set({
+          total: 500,
+          good: 480,
+          sale: 330
+        }).then(() => {
+          console.log('set data successful');
+        });
+      }
     </script>
   </body>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+<script src='https://www.gstatic.com/firebasejs/7.15.1/firebase.js'></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -118,4 +133,18 @@ function storedata() {
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 </script>
+<script>
+    var storage = firebase.storage();
+   //做一個簡單的檔案上傳器
+    //……………………………………………………………………..
+    var fileButton=document.getElementById('fileButton');
+   fileButton.addEventListener("change", function(e) {
+   //檔案
+    var file=e.target.files[0];
+   //設定firebase上傳細節
+    var storageRef = firebase.storage().ref('photo/'+file.name);
+   //執行！
+    storageRef.put(file);
+   });
+   </script>
 </html>
