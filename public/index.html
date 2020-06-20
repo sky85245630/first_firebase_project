@@ -3,12 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
-    
+    <title>First Web Firebase Project</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </head>
   <body>
+    <style>
+      body{
+        font-family: 微軟正黑體;
+      }
+    </style>
+
+
+
+
+    <header>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <strong>IT QQ</strong>
+          </a>
+        </div>
+      </div>
+    </header>
+
     <div id="message">
-      <p>IT QQ</p>
     <button onclick="getdata()"> get</button>
     <button onclick="storedata()"> storedata</button>
     <button onclick="set()">set</button>
@@ -16,7 +38,45 @@
     storedata
 
     </div>
-    <p id="load"></p><input type='file' id='fileButton' value='upload'></p>
+
+   <input type='file' id='fileButton' value='upload'>
+
+
+   <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            取得資料
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">取得資料</h5>
+            <p class="card-text">
+              
+      function getdata() {
+        var db = firebase.firestore();
+                  
+            var docRef = db.collection("movies").doc("新世紀福爾摩斯");
+            docRef.get().then(function(doc) {
+                if (doc.exists) {
+                  console.log(doc.data());
+                } else {
+                  console.log("找不到文件");
+                }
+              })
+              .catch(function(error) {
+                console.log("提取文件時出錯:", error);
+              });
+          }
+            </p>
+            <a href="#" class="btn btn-primary" onclick="getdata()">取得資料</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+    </div>
+   </div>
     <script>
       
 
