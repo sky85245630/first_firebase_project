@@ -51,23 +51,8 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">取得資料</h5>
-            <p class="card-text">
+            <p id="getData" class="card-text">
               
-      function getdata() {
-        var db = firebase.firestore();
-                  
-            var docRef = db.collection("movies").doc("新世紀福爾摩斯");
-            docRef.get().then(function(doc) {
-                if (doc.exists) {
-                  console.log(doc.data());
-                } else {
-                  console.log("找不到文件");
-                }
-              })
-              .catch(function(error) {
-                console.log("提取文件時出錯:", error);
-              });
-          }
             </p>
             <a href="#" class="btn btn-primary" onclick="getdata()">取得資料</a>
           </div>
